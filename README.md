@@ -1,0 +1,2 @@
+# SchedMaster
+Mobile Scheduling App
