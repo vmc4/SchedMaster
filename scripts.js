@@ -6,6 +6,14 @@
 	localStorage.busId = 1;
 	var myType = localStorage.type;
 	var myId = localStorage.id;
+	
+	function test() {
+		var myInfo = "key=invincible&email=to@password=0&action=getApts";
+		var endpoint = "usermanager.php";
+		var form = document.getElementById("testForm");
+		var request = new XMLHttpRequest();
+		alert(sendRequest(myInfo, request, form, endpoint));
+	}
 
 	function getAppts() {
 
