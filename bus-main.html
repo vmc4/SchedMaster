@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="scripts.js"></script>
+</head>
+<body>
+
+<div data-role="page" id="index">
+	<div data-role="header">
+	  <a href="#" class="ui-btn ui-btn-left ui-corner-all ui-shadow ui-icon-home ui-btn-icon-left">Home</a>
+	  <h1>Welcome To My Homepage</h1>
+	</div>
+	<div data-role="main" class="ui-content">
+		<a class="ui-btn" href="#myappts"> 
+			My Appointments
+		</a>
+		<a class="ui-btn" href="#schdappt"> 
+			Schedule Appointment
+		</a>
+		<a class="ui-btn" href="#mybus">
+			My Businesses
+		</a>
+	</div>
+</div>
+
+<div data-role="page" id="myappts">
+  <div data-role="main" class="ui-content">
+    <form method="post" name="myappts" id="myappts">
+    <input type="hidden" id="action" name="action" value="test">
+    <input type="button" value="Submit" onclick="getAppts()">
+    </form>
+  </div>
+</div>
+
+<div data-role="page" id="schdappt">
+  <div data-role="main" class="ui-content">
+    <a href="#schdappt">schdappt</a>
+  </div>
+</div>
+
+<div data-role="page" id="mybus">
+  <div data-role="main" class="ui-content">
+    <a href="#mybus">mybus</a>
+  </div>
+</div>
+
+</body>
+</html>
