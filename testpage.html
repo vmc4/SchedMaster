@@ -19,14 +19,19 @@
 
 <form id="testForm" action="http://lakehousesales.com/SchedMaster/usermanager.php" method="post">
   <input type="hidden" name="key" value="invincible">
+  <input type="hidden" name="action" value="getAppts">
+  <!-- <input type="hidden" name="email" value="admin@lakehousesale.com">
+  <input type="hidden" name="password" value="google">
+  <input type="hidden" name="firstName" value="Admin">
+  <input type="hidden" name="lastName" value="User">
+  <input type="hidden" name="businessName" value="SchedMaster">
+  <input type="hidden" name="phone" value="000000000">
+  <input type="hidden" name="businessCategory" value="IT Services"> -->
   <input type="hidden" name="email" value="to">
   <input type="hidden" name="password" value="0">
 
-  <input type="hidden" name="action" value="getCategories">
-  <input type="hidden" name="userId" value="1">
-  <!-- <input type="hidden" name="category" value="manicure">
-  <input type="hidden" name="catLength" value="100">
-  <input type="hidden" name="catPrice" value="$25"> -->
+  <!-- <input type="hidden" name="action" value="deleteCategory">
+  <input type="hidden" name="categoryId" value="1"> -->
 
   <!-- <input type="hidden" name="recipientId" value="2">
   <input type="hidden" name="startTime" value="10">
@@ -35,8 +40,11 @@
   <input type="hidden" name="comments" value="do it better"> -->
       <!-- <input type="hidden" name="action" value="getAppts">
       <input type="hidden" name="apptId" value="2"> -->
-  <input type="button" value="test" onclick="test()">
+  <input type="button" value="test" onclick="getAppts()">
 </form>
+<table id="appts">
+
+</table>
 
 </body>
 </html>
