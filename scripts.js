@@ -1,54 +1,79 @@
 
-	var url = 'http://www.lakehousesales.com/SchedMaster/';
+	var url = 'http://www.lakehousesales.com/SchedMaster/usermanager.php';
+	var assetUrl = 'http://www.lakehousesales.com/SchedMaster/assetUrl.php';
 	var localStorage = window.localStorage;
 	localStorage.id = 1;
 	localStorage.type = "c";
 	localStorage.busId = 1;
 	var myType = localStorage.type;
 	var myId = localStorage.id;
-	
-	function test() {
-		var myInfo = "key=invincible&email=to@password=0&action=getApts";
-		var endpoint = "usermanager.php";
-		var form = document.getElementById("testForm");
-		var request = new XMLHttpRequest();
-		alert(sendRequest(myInfo, request, form, endpoint));
+
+	function buildParams(form) {
+			var params = "";
+	    for(var i=0; i < form.elements.length; i++) {
+			var e = form.elements[i];
+			if(e.type.toLowerCase() != 'button') {
+				params += e.name+"="+e.value;
+				if( i != (form.elements.length - 1) ) {
+					params += "&";
+				}
+			}
+		}
+		return params;
+
+		// request.open("POST", url+endpoint, true);
+		// request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		// request.send(params);
 	}
 
-	function getAppts() {
+	function getAppts(form) {
 
+		var form = document.getElementById('testForm');
 		var endpoint = "customermanager.php";
-		var params = "key=invincible&userTable=Users&email=to@password=0&action=getAppts";
-		alert(sendReqest(endpoint, params));
+		var params = "key=invincible&email=admin@lakehousesales.com&password=google&action=getAppts";
+		var request = new XMLHttpRequest();
+		request.open("POST", url, true);
+		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		request.send(params);
+		request.onreadystatechange = function() {
+			if(request.status == 200) {
+				var obj = JSON.parse(request.responseText);
+				for(var prop in obj) {
+					val = obj[prop];
+					console.log(prop +"="+ val);
+				}
+			}
+		}
+
+
+		// alert(sendRequest(params, endpoint));
 	}
 
-	function register(type) {
+	function getRelationships() {
 
-		var endpoint = "usermanager.php";
+	}
 
-		if(type == "cust") {
-			var first = $('input[name="first"]').val();
-			var last = $('input[name="last"]').val();
-			var email = $('input[name="email"]').val();
-			var phone = $('input[name="phone"]').val();
-			var password = $('input[name="password"]').val();
 
-			var params = "action=register&first="+first+"&last="+last+"&email="+email+"&phone="+phone+"&password="+password;
-			console.log(params)
-		}
-		else if(type == "bus") {
-			var busName = $('input[name="busName"]').val();
-			var email = $('input[name="email"]').val();
-			var phone = $('input[name="phone"]').val();
-			var type = $('input[name="type"]').val();
-			var password = $('input[name="password"]').val();
+	function register(element) {
 
-			var params = "action=register&busName="+busName+"&email="+email+"&phone="+phone+"$type="+type+"&password="+password;
-			console.log(params);
+		var params = buildParams(element.form);//"action=register&first="+first+"&last="+last+"&busName="+busName+"&email="+email+"&phone="+phone+"&password="+password;
+		var request = new XMLHttpRequest();
+		request.open("POST", url, true);
+		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		request.send(params+"action=register&key=invincible");
+		request.onreadystatechange = function() {
+			if(request.status == 200) {
+				if(request.responseText == "1") {
+					window.location = "my_schedule.html";
+				}
+				else {
+					//retry
+				}
+			}
 		}
 
 
-		sendRequest(endpoint, params);
+
 	}
 
 	function login() {
@@ -61,55 +86,9 @@
 		var response;
 
 		sendRequest(request, endpoint, params);
-		request.onreadystatechange = function() {
-			if (request.readyState == 4 && request.status == 200) {
-				response = request.responseText;
-				alert(response);
-				if(response.split("^")[1] > 0) {
-	  				alert('logged in');
-	  				if(response.split("^")[0] == "c") {
-	  					localStorage.type = "c";
-	  					localStorage.id = response.split("^")[1];
-	  					window.location.replace('cust-main.html');
-	  				}
-	  				else if(response.split("^")[0] == "b") {
-	  					localStorage.type = "b";
-	  					localStorage.id = response.split("^")[1];
-	  					window.location.replace('bus-main.html');
-	  				}
-	  				$('#bus-main').click();
-	  		  	}
-	  		  	else {
-	  		  		alert("Invalid Username or Password");
-	  		  	}
-			}
-	  	};
-
 
 	}
 
-
-
-	function getBusById(i) {
-
-		var request = new XMLHttpRequest(); //used to retrieve result
-		var endpoint = "businessmanager.php";
-		var action = "getBus";
-
-
-		var busId;
-		if(i == null) {
-			busId = (localStorage.busId != null) ? localStorage.busId : localeStorage.myId;
-			//get busInfo by id, use it to populate select elemeent
-
-		}
-		else {
-			busId = i;
-		}
-
-
-
-	}
 
 	function createAppt() {
 
@@ -152,23 +131,4 @@
 
 	function addBus() {
 
-	}
-
-	function sendRequest(myInfo, request, form, endpoint) {
-	    //why did you make this function lol
-	    var params = myInfo;
-	    for(var i=0; i < form.elements.length; i++){
-			var e = form.elements[i];
-			if(e.type.toLowerCase() != 'button') {
-				params += e.name+"="+e.value;
-				if( i != (form.elements.length - 1) ) {
-					params += "&";
-				}
-			}
-		}
-		alert(params);
-
-		request.open("POST", url+endpoint, true);
-		request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		request.send(params);
 	}
