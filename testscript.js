@@ -1,6 +1,27 @@
 
 var url = 'http://www.lakehousesales.com/SchedMaster/usermanager.php';
 
+function login(form) {
+	alert(form);
+	params = buildParams(form) + "action=login";
+	alert(params);
+}
+
+function register(form) {
+	params = buildParams(form) + "action=register";
+	alert(params);
+
+	if(obj[0].id > 0) {
+		//success
+		localStorage.id = obj.id;
+		localStorage.email = obj.email;
+		localStorage.password = obj.password;
+	}
+	else {
+		//fail
+	}
+}
+
 function getAppts() {
 
 	var form = document.getElementById('testForm');
