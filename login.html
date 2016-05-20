@@ -9,62 +9,51 @@
 </head>
 <body>
 
- 	<div data-role="page" id="login">
-    	<label for="fname">Email</label>
-		<input type="text" name="email" id="email">
+ <div style="margin:auto;">
+    <form id="testForm" action="http://lakehousesales.com/SchedMaster/usermanager.php" method="post">
+      <input type="hidden" name="key" value="invincible">
+      <input type="hidden" name="action" value="login">
 
-		<label for="fname">Password:</label>
-		<input type="text" name="password" id="password">
-		<input type="button" id="gen" value="Login" onclick="login()">
-		<a href="#signup-cust">Don't have an account? Sign up</a>
-		<form method="post" action="http://lakehousesales.com/SchedMaster/usermanager.php">
-			<input type="hidden" value="invincible" name="key">
-			<input type="submit" value="test" >
-		</form>
+      <label for="email">Email:</label>
+      <input id="email" type="text" name="email" >
+      <label for="password">Password:</label>
+      <input id="password" type="text" name="password">
+
+      <input type="button" value="Login" onclick="login(this.form)">
+    </form>
+    <br><br> <p style="margin:auto;">Don't Have An Account?</p>
+    <a href="#signUp" data-rel="popup" data-position-to="window" data-transition="fade" class="ui-btn"> Sign Up </a>
+</div>
+<!-- SIGN UP DIALOG -->
+<div data-role="popup" id="signUp" style="width:75%;">
+      <div data-role="header">
+        <h1>Create An Account</h1>
+      </div>
+
+      <div data-role="main" class="ui-content">
+        <form id="register">
+            <input type="text" name="name" placeholder="Name">
+            <input type="text" name="busName" placeholder="Business Name">
+            <input type="email" name="email" placeholder="Email">
+            <input type="password" name="password" placeholder="Password">
+            <input type="password" name="confPassword" placeholder="Confirm Password">
+            <input type="number" name="phone" min="1" max="5" placeholder="Phone">
+            <label for="newCategory">Account Category</label>
+            <select name="category">
+              <option value="personal">Personal</option>
+              <option value="auto">Auto</option>
+              <option value="health">Health Care</option>
+              <option value="home">Home Improvement</option>
+              <option value="goods">Goods</option>
+              <option value="services">Services</option>
+            </select>
+            <input type="button" onclick="register(this.form)" value="SUBMIT">
+        </form>
+      </div>
+
+
     </div>
 
-	<div data-role="page" id="signup-cust">
-		<form method="post" action="demoform.asp">
-		  <label for="fname">First name:</label>
-		  <input type="text" name="first" id="first">
-
-		  <label for="fname">Last name:</label>
-		  <input type="text" name="last" id="last">
-
-		  <label for="fname">Email:</label>
-		  <input type="text" name="email" id="email">
-
-		  <label for="fname">Phone:</label>
-		  <input type="text" name="phone" id="phone">
-
-		  <label for="fname">Password:</label>
-		  <input type="text" name="password" id="password">
-
-		  <input type="button" value="Register" id="cust" onclick="register(this.id)">
-		</form>
-    </div>
-
-    <div data-role="page" id="signup-bus">
-		<form method="post" action="demoform.asp">
-		  <label for="busName">Business Name:</label>
-		  <input type="text" name="busName" id="busName">
-
-		  <label for="fname">Email:</label>
-		  <input type="text" name="email" id="email">
-
-		  <label for="fname">Phone:</label>
-		  <input type="text" name="phone" id="phone">
-
-		  <label for="fname">Password:</label>
-		  <input type="text" name="password" id="password">
-
-		  <input type="button" value="register" id="bus" onclick="register(this.id)">
-		  <!--
-<label for="fname">Type:</label>
-		  <input type="text" name="phone" id="phone">
- -->
-		</form>
-    </div>
 
 </body>
 </html>
